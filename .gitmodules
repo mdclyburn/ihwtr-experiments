@@ -1,0 +1,9 @@
+[submodule "tock"]
+	path = 20210622-midpoint-experiments/tock
+	url = https://github.com/mdclyburn/tock
+[submodule "libtock-rs"]
+	path = 20210622-midpoint-experiments/libtock-rs
+	url = https://github.com/mdclyburn/libtock-rs
+[submodule "20210622-midpoint-experiments/iot-test"]
+	path = 20210622-midpoint-experiments/iot-test
+	url = https://github.com/mdclyburn/iot-test.git
