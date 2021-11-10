@@ -8,8 +8,8 @@
 	path = 20210622-midpoint-experiments/iot-test
 	url = https://github.com/mdclyburn/iot-test.git
 [submodule "invariant-validation/interrupt-no-response/tock"]
-	path = invariant-validation/interrupt-no-response/tock
+	path = invariant-validation/20211110-interrupt-no-response/tock
 	url = https://github.com/mdclyburn/tock.git
 [submodule "invariant-validation/interrupt-no-response/libtock-c"]
-	path = invariant-validation/interrupt-no-response/libtock-c
+	path = invariant-validation/20211110-interrupt-no-response/libtock-c
 	url = https://github.com/mdclyburn/libtock-c.git
