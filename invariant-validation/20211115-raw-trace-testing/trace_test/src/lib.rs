@@ -17,8 +17,6 @@ use clockwise_common::{
         EnergyCriterion,
         EnergyStat,
         Timing,
-        ParallelTraceCondition,
-        ParallelTraceCriterion,
         SerialTraceCondition,
         SerialTraceCriterion,
     },
@@ -51,8 +49,11 @@ impl SampleTestProvider {
                     (&[]).into_iter().copied(),
                     (&[]).into_iter().copied(),
                     &[Operation::at(0).idle_sync(Duration::from_millis(3000))],
-                    &[Criterion::SerialTrace(SerialTraceCriterion::new(&[
-                        SerialTraceCondition::new(&[0x01])]))],
+                    &[
+                        Criterion::SerialTrace(SerialTraceCriterion::new(&[])),
+                        Criterion::Energy(EnergyCriterion::new("system", EnergyStat::Max)),
+                        Criterion::Energy(EnergyCriterion::new("system", EnergyStat::Min)),
+                    ],
                     true),
             ]
         }
