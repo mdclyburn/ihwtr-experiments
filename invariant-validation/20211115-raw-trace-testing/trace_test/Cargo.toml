@@ -1,0 +1,12 @@
+[package]
+name = "trace_test"
+version = "0.1.0"
+authors = ["Marshall Clyburn <mardev2013@gmail.com>"]
+edition = "2018"
+
+[lib]
+name = "clockwise_trace_test"
+crate_type = ["dylib"]
+
+[dependencies]
+clockwise_common = { path = "../../../../clockwise/common" }
