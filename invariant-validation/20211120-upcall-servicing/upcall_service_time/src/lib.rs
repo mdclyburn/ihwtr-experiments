@@ -1,14 +1,9 @@
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-        assert_eq!(2 + 2, 4);
-    }
-}
 use std::time::Duration;
 
 #[allow(unused_imports)]
-use clockwise_common::comm::{Direction, Class as SignalClass};
+use clockwise_common::comm::{Direction,
+                             Class as SignalClass,
+                             Signal};
 #[allow(unused_imports)]
 use clockwise_common::{
     criteria::{
@@ -42,13 +37,27 @@ pub struct SampleTestProvider {
 
 impl SampleTestProvider {
     fn new() -> SampleTestProvider {
+        let inputs: Vec<Operation> = (0..)
+            .step_by(50)
+            .take_while(|t| *t < 3000)
+            .map(|t| Operation::at(t))
+            .zip(1..)
+            .map(|(op, c)| {
+                op.input(Signal::Digital(if c % 2 == 0 {
+                    true
+                } else {
+                    false
+                }), 13)
+            })
+            .collect();
+
         SampleTestProvider {
             tests: vec![
                 Test::new(
-                    "collect-traces",
+                    "upcall-service-time",
                     (&[]).into_iter().copied(),
                     (&[]).into_iter().copied(),
-                    &[Operation::at(0).idle_sync(Duration::from_millis(10000))],
+                    &inputs,
                     &[
                         Criterion::SerialTrace(SerialTraceCriterion::new(&[])),
                         Criterion::Energy(EnergyCriterion::new("system", EnergyStat::Max)),
