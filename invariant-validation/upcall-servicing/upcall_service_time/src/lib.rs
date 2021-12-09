@@ -1,5 +1,7 @@
 use std::time::Duration;
 
+use rand;
+
 #[allow(unused_imports)]
 use clockwise_common::comm::{Direction,
                              Class as SignalClass,
@@ -37,18 +39,13 @@ pub struct SampleTestProvider {
 
 impl SampleTestProvider {
     fn new() -> SampleTestProvider {
+        // let step_interval = rand::random::<usize>() % 20 + 13;
         let inputs: Vec<Operation> = (0..)
             .step_by(50)
             .take_while(|t| *t < 3000)
             .map(|t| Operation::at(t))
-            .zip(1..)
-            .map(|(op, c)| {
-                op.input(Signal::Digital(if c % 2 == 0 {
-                    true
-                } else {
-                    false
-                }), 13)
-            })
+            .zip((&[true, false]).iter().copied().cycle())
+            .map(|(op, sig)| op.input(Signal::Digital(sig), 13))
             .collect();
 
         SampleTestProvider {

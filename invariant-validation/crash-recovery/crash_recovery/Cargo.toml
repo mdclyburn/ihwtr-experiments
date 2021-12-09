@@ -10,3 +10,4 @@ crate_type = ["dylib"]
 
 [dependencies]
 clockwise_common = { path = "../../../../clockwise/common" }
+rand = "*"
